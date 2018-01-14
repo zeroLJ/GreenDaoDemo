@@ -33,7 +33,7 @@ public class MySQLiteOpenHelper extends DaoMaster.OpenHelper {
 //                String sql = "";
 //                db.execSQL(sql);
             case 2:
-                //使用MigrationHelper更新表结构时，新增字段不能为int，最好为string类型，否则旧有数据会无法查询
+                //使用MigrationHelper更新表结构时，新增字段不能为int，最好为string类型，否则旧有数据会被删除
                 MigrationHelper.migrate(db,UserDao.class);
             case 3:
 

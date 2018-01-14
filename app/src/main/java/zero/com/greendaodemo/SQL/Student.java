@@ -18,6 +18,9 @@ public class Student {
     private String name;
     private int age;
     private String sex;
+
+
+    //以下为自动生成的代码
     @Generated(hash = 621291343)
     public Student(Long id, @NotNull String name, int age, String sex) {
         this.id = id;

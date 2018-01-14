@@ -20,6 +20,10 @@ public class User {
     private int age;
     private int sex;
     private String country;
+
+
+
+    //以下为自动生成的代码
     @Generated(hash = 818648874)
     public User(Long id, @NotNull String name, int age, int sex, String country) {
         this.id = id;

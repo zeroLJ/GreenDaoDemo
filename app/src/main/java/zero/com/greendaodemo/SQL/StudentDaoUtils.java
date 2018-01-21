@@ -7,7 +7,7 @@ import java.util.List;
 import static zero.com.greendaodemo.SQL.UserDaoUtils.getUserDao;
 
 /**
- * Created by jj on 2018/1/10.
+ * Created by zero on 2018/1/10.
  */
 
 public class StudentDaoUtils {
@@ -106,7 +106,7 @@ public class StudentDaoUtils {
      * @param id
      * @return
      */
-    public static Student loadAll(Long id){
+    public static Student load(Long id){
         return getStudentDao().load(id);
     }
 }

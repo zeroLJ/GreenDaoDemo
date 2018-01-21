@@ -6,35 +6,19 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:gravity="center"
     tools:context="zero.com.greendaodemo.MainActivity">
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="插入一条记录"
-        android:onClick="insert"/>
+        android:text="使用独立工具类"
+        android:onClick="sample" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="修改一条记录"
-        android:onClick="updata"/>
+        android:text="使用统一工具类"
+        android:onClick="sample2"/>
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="删除一条记录"
-        android:onClick="delete"/>
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="按条件删除记录"
-        android:onClick="deleteBy"/>
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="查询记录"
-        android:onClick="search"/>
 </LinearLayout>

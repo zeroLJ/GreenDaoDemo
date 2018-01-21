@@ -7,10 +7,10 @@ import org.greenrobot.greendao.annotation.Unique;
 import org.greenrobot.greendao.annotation.Generated;
 
 /**
- * Created by jj on 2018/1/10.
+ * Created by zero on 2018/1/10.
  */
 @Entity
-public class Student {
+public class Student extends BaseEntity {
     @Unique
     @Id(autoincrement =true)
     private Long id;

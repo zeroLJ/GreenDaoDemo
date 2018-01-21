@@ -5,7 +5,7 @@ import org.greenrobot.greendao.query.WhereCondition;
 import java.util.List;
 
 /**
- * Created by jj on 2018/1/10.
+ * Created by zero on 2018/1/10.
  */
 
 public class UserDaoUtils {
@@ -104,7 +104,7 @@ public class UserDaoUtils {
      * @param id
      * @return
      */
-    public static User loadAll(Long id){
+    public static User load(Long id){
         return getUserDao().load(id);
     }
 }

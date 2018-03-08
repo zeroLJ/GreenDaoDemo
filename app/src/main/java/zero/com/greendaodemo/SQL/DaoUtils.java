@@ -5,6 +5,7 @@ import org.greenrobot.greendao.query.WhereCondition;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -54,7 +55,7 @@ public class DaoUtils {
      */
     @SuppressWarnings("unchecked")
     private static Object invokeMethod(Object owner, String methodName,
-                                Object[] args) throws Exception {
+                                       Object[] args) throws Exception {
         Class ownerClass = owner.getClass();
         methodName = methodName.substring(0, 1).toUpperCase()
                 + methodName.substring(1);
@@ -83,6 +84,20 @@ public class DaoUtils {
     }
 
     /**
+     * 插入多条记录
+     */
+    public static <T extends BaseEntity> boolean insert(List<T> entitys){
+        boolean flag = false;
+        try {
+            getDao(entitys.get(0).getClass()).insertInTx(entitys);
+            flag = true;
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return flag;
+    }
+
+    /**
      * 通过map插入一条记录
      * @param c 要插入的表
      * @param map 带有表c所需的值，key值必须与表c的变量名相同
@@ -92,6 +107,27 @@ public class DaoUtils {
         boolean flag = false;
         try {
             getDao(c).insert(mapToEntity(c, map));
+            flag = true;
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return flag;
+    }
+
+    /**
+     * 通过map插入多条记录
+     * @param c 要插入的表
+     * @param list map中带有表c所需的值，key值必须与表c的变量名相同
+     * @return
+     */
+    public static <T extends BaseEntity> boolean insert(Class<T> c, List<Map<String,Object>> list){
+        boolean flag = false;
+        try {
+            List<T> mList = new ArrayList<>();
+            for (Map<String, Object> note : list){
+                mList.add(DaoUtils.mapToEntity(c, note));
+            }
+            insert(mList);
             flag = true;
         }catch (Exception e){
             e.printStackTrace();
@@ -138,7 +174,7 @@ public class DaoUtils {
      * @param condMore  可增加复数条件
      */
 
-    public static boolean delete(Class c,WhereCondition condition, WhereCondition... condMore){
+    public static boolean delete(Class c, WhereCondition condition, WhereCondition... condMore){
         boolean flag = false;
         try {
             getDao(c).queryBuilder()
@@ -148,7 +184,22 @@ public class DaoUtils {
             e.printStackTrace();
         }
         return flag;
+    }
 
+    /**
+     * 删除指定表所有数据
+     * @param c
+     * @return
+     */
+    public static boolean deleteAll(Class c){
+        boolean flag = false;
+        try {
+            DaoUtils.getDao(c).deleteAll();
+            flag = true;
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return flag;
     }
 
     /**
@@ -158,8 +209,12 @@ public class DaoUtils {
      * @return
      */
     public static <T> List<T> query(Class<T> c, WhereCondition condition, WhereCondition... condMore){
-        return getDao(c).queryBuilder()
-                .where(condition, condMore).list();
+        List<T> list = new ArrayList<>();
+        if (getDao(c)!=null){
+            list.addAll(getDao(c).queryBuilder()
+                    .where(condition, condMore).list());
+        }
+        return list;
     }
 
     /**
